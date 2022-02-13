@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+   <h1>JASON</h1>
+   <h2>Javascript Object Notation </h2>
+   <ul id="user-container">
+
+   </ul>
+   <input id="title" type="text" placeholder="Post">
+   <br>
+   <input id="bodyContain" type="text" placeholder="comment">
+   <br>
+   <button id="submit">Submit </button>
+   <!-- <script>
+  //    const  user = {id: 2929,
+  //     name: "sojib",
+  //     lover: {
+  //       name : "sunny Leayon",
+  //       favFood: "pizza"
+  //     },
+  //      friendAges: [29,34,22],
+  //      friend: ["kamal", "jamal", "solimodi"]
+       
+  //      };
+  //    const userJason = JSON.stringify(user);
+  //    console.log(userJason);
+  //    const userJasonFrom = JSON.parse(userJason);
+  //    console.log(userJasonFrom);
+  //  </script> -->
+ <script>
+//Creating a resource///............
+    document.getElementById("submit").addEventListener("click",function(){
+      const title = document.getElementById("title").value;
+      const bodyContain =document.getElementById("bodyContain").value;
+      const post = {title:title, body:bodyContain};
+      nowPostToServer(post)
+    })
+
+  function nowPostToServer(POSTInfo){
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify(POSTInfo),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+  }
+        
+        ////Creating a resource.....................
+
+
+
+  function DisplayUser (user){
+   const userName = user.map(user => user.username);
+   const ul =document.getElementById("user-container");
+   for(let i =0; i < userName.length; i ++){
+     const user = userName[i];
+     const li = document.createElement("li");
+     li.innerText = user;
+     ul.appendChild(li);
+
+   }
+  }
+ </script>
+
+</body>
+</html>
